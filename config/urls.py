@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,6 @@ urlpatterns = [
     path('', include('products.urls_web')),  # главная страница
     path('cart/', include('orders.urls_web')),
     path('account/', include('users.urls_web')),
+    path('api/users/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/users/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
